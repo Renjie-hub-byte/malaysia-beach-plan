@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>沙巴亚庇 · 十一海边方案（住到 10/6 或 10/7 两版）</title>
+<style>
+  :root{
+    --sea:#0F4C5C; --sea-deep:#0A3541; --sand:#F6F3EC; --coral:#E36414;
+    --ink:#22303A; --ink-2:#5B6B76; --line:#E4DDD0; --card:#FFFFFF; --ok:#1B7A4B;
+    --fliggy:#FF6A00;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--sand);color:var(--ink);line-height:1.6}
+  .wrap{max-width:860px;margin:0 auto;padding:20px 16px 60px}
+  header{padding:26px 4px 12px}
+  .kicker{display:inline-block;font-size:12px;letter-spacing:.18em;color:var(--coral);font-weight:600;margin-bottom:8px}
+  h1{font-size:26px;line-height:1.3;font-weight:800;color:var(--sea-deep)}
+  h1 .en{display:block;font-size:13px;font-weight:500;color:var(--ink-2);letter-spacing:.06em;margin-top:4px}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .chip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:12.5px;color:var(--ink-2)}
+  .chip b{color:var(--sea);font-weight:700}
+  .back{display:inline-block;margin-top:14px;font-size:12.5px;color:var(--sea);text-decoration:none;font-weight:600}
+  .note{background:#FDF8EE;border:1px solid #EFE3C8;border-radius:12px;padding:10px 14px;font-size:12px;color:#8A6D3B;margin:10px 0 18px}
+  .note b{color:#6E5526}
+  .tabs{display:flex;gap:6px;position:sticky;top:0;z-index:50;background:var(--sand);padding:10px 0;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{flex:0 0 auto;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 15px;font-size:13.5px;color:var(--ink-2);cursor:pointer;font-weight:600;transition:all .15s}
+  .tab.active{background:var(--sea);border-color:var(--sea);color:#fff}
+  .tab .tag{font-size:10.5px;opacity:.75;margin-left:4px}
+  .panel{display:none;padding-top:18px}
+  .panel.active{display:block}
+  .sumline{display:flex;align-items:baseline;justify-content:space-between;background:var(--sea);color:#fff;border-radius:14px;padding:14px 18px;margin-bottom:18px;flex-wrap:wrap;gap:6px}
+  .sumline.win{background:var(--win)}
+  .sumline .lbl{font-size:13px;opacity:.9}
+  .sumline .val{font-size:24px;font-weight:800;font-variant-numeric:tabular-nums}
+  .sumline .val small{font-size:12.5px;font-weight:500;opacity:.85;margin-left:6px}
+  h2.sect{font-size:15px;font-weight:800;color:var(--sea-deep);margin:22px 4px 10px;display:flex;align-items:center;gap:8px}
+  h2.sect::before{content:"";width:4px;height:16px;border-radius:2px;background:var(--coral);display:inline-block}
+  h2.sect .sub{font-size:11.5px;color:var(--ink-2);font-weight:500}
+  .hotel{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-bottom:16px;box-shadow:0 1px 3px rgba(34,48,58,.05)}
+  .ph{position:relative;background:#E8E2D6;display:flex;gap:2px}
+  .ph a{flex:1;position:relative;aspect-ratio:16/10;overflow:hidden;display:block}
+  .ph a img{width:100%;height:100%;object-fit:cover;display:block}
+  .ph a .cap{position:absolute;left:8px;bottom:8px;background:rgba(10,53,65,.82);color:#fff;font-size:10.5px;padding:2px 8px;border-radius:999px}
+  .ph img{flex:1;min-width:0;width:0;aspect-ratio:16/10;object-fit:cover;display:block}
+  .ph .zone{position:absolute;left:12px;top:12px;z-index:2;background:rgba(10,53,65,.85);color:#fff;font-size:11.5px;padding:3px 10px;border-radius:999px;backdrop-filter:blur(4px)}
+  .hotel .bd{padding:14px 16px 16px}
+  .hotel .nm{font-size:17px;font-weight:800;color:var(--sea-deep);line-height:1.35}
+  .hotel .nm .en{display:block;font-size:11.5px;font-weight:500;color:var(--ink-2)}
+  .hotel .stars{color:#E8A33D;font-size:13px;letter-spacing:2px}
+  .hotel .stars .grey{color:#DDD5C4}
+  .hotel .facts{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:8px;font-size:12.5px;color:var(--ink-2)}
+  .hotel .facts b{color:var(--ink);font-weight:600}
+  .price-row{display:flex;align-items:baseline;gap:10px;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);flex-wrap:wrap}
+  .price-row .p{font-size:22px;font-weight:800;color:var(--coral);font-variant-numeric:tabular-nums}
+  .price-row .p small{font-size:13px;font-weight:600}
+  .price-row .per{font-size:12.5px;color:var(--ink-2)}
+  .price-row .per b{color:var(--sea)}
+  .book{display:inline-block;margin-top:10px;background:var(--sea);color:#fff;text-decoration:none;font-size:13px;font-weight:600;border-radius:10px;padding:8px 16px}
+  .book.fliggy{background:var(--fliggy)}
+  .badge{display:inline-block;font-size:11px;font-weight:700;border-radius:6px;padding:2px 8px;margin-left:8px;vertical-align:2px}
+  .badge.pick{background:#FDEBD9;color:#B4520F}
+  .badge.alt{background:#EDF2F5;color:var(--sea)}
+  .badge.value{background:#E7F3EA;color:#1B7A4B}
+  .concl{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:20px}
+  .concl.win{border-color:var(--win);border-width:2px}
+  .concl h3{font-size:15px;font-weight:800;color:var(--sea-deep);margin-bottom:10px}
+  .concl li{font-size:13.5px;color:var(--ink);margin:8px 0 8px 18px}
+  .concl li b{color:var(--coral)}
+  .concl .fine{font-size:11.5px;color:var(--ink-2);margin-top:12px;padding-top:10px;border-top:1px dashed var(--line)}
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px}
+  table{width:100%;border-collapse:collapse;font-size:12.5px;background:#fff}
+  th,td{padding:9px 10px;text-align:left;border-bottom:1px solid #F0EBE0;vertical-align:top}
+  th{background:var(--sea);color:#fff;font-weight:600;font-size:12px;white-space:nowrap}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:var(--sea-deep);white-space:nowrap}
+  tr:last-child td{border-bottom:none}
+  .pill{display:inline-block;font-size:10.5px;font-weight:700;border-radius:6px;padding:2px 7px}
+  .pill.direct{background:#E7F3EA;color:#1B7A4B}
+  .pill.stop{background:#F2F0EA;color:#7A6A55}
+  .flight{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-bottom:12px}
+  .flight .top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+  .flight .no{font-size:14px;font-weight:800;color:var(--sea-deep)}
+  .flight .air{font-size:12px;color:var(--ink-2)}
+  .flight .time{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:14px}
+  .flight .time b{font-size:17px;font-weight:800;color:var(--sea-deep);font-variant-numeric:tabular-nums}
+  .flight .time .dur{font-size:11.5px;color:var(--ink-2);text-align:center;flex:1;border-top:1px dashed var(--line);padding-top:3px}
+  .flight .price{font-size:19px;font-weight:800;color:var(--coral);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .flight .price small{font-size:11px;font-weight:600;color:var(--ink-2)}
+  .footer{margin-top:28px;text-align:center;font-size:11.5px;color:var(--ink-2)}
+  .footer a{color:var(--sea)}
+  @media(min-width:640px){h1{font-size:30px}.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}.two .hotel{margin-bottom:0}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <span class="kicker">SABAH PLAN · 亚庇海边深度版</span>
+  <h1>沙巴亚庇 · 独立方案<span class="en">北京出发 10/2 去 ｜ 住到 10/6 或 10/7 ｜ 海岛跳岛 + 世界日落</span></h1>
+  <div class="meta">
+    <span class="chip">📅 10/2 晚出发</span>
+    <span class="chip">🏠 <b>10/6 回</b> 3晚 / <b>10/7 回</b> 4晚 两版</span>
+    <span class="chip">👥 2人</span>
+    <span class="chip">⭐ 五星海边为主</span>
+  </div>
+  <a class="back" href="./">← 返回「三亚 vs 沙巴」总览</a>
+</header>
+
+<div class="note">
+  📌 <b>数据口径</b>：飞猪官方接口 2026-09-27 实时查询，机票人民币/人，酒店为「每晚」含税参考价（1间2人）。已按 10/2-10/6 与 10/2-10/7 两个日期段复核，价格基本持平（个别酒店±5%浮动）。<b>距出发仅 4 天，国庆房紧，看中尽快锁。</b>
+</div>
+
+<nav class="tabs" id="tabs">
+  <button class="tab active" data-p="pc">先看结论 · 两版怎么选</button>
+  <button class="tab" data-p="pf">机票</button>
+  <button class="tab" data-p="ph">酒店推荐</button>
+  <button class="tab" data-p="pi">行程玩法</button>
+  <button class="tab" data-p="pt">贴士</button>
+</nav>
+
+<!-- ============ 结论 ============ -->
+<section class="panel active" id="pc">
+  <div class="concl win">
+    <h3>🎯 小欣的答案：能请到 7 号，就住到 7 号</h3>
+    <li>沙巴这个行程，<b>去程占了 10/2 晚上和 10/3 一早</b>（红眼落地），每天都是精华，<b>多待一天差别很大</b>：跳岛 + 美人鱼岛 + 神山/红树林，三天塞不下，四天刚好。</li>
+    <li><b>差价其实不大</b>：10/7 回程直飞 ¥4,706 比 10/6 早班 ¥4,150 贵 <b>¥556/人</b>（两人 ¥1,112），换来的 10/6 整天 + 10/7 白天，值不值你自己掂量 —— 但注意 10/7 是<b>当晚 23:15 才到北京</b>，7 号白天你在路上/在亚庇，<b>7 号当天有安排就选 6 号回</b>。</li>
+    <li>另外「住到 7 号」的酒店是 <b>4 晚</b>，「住到 6 号」是 <b>3 晚</b>，差价里还包含一晚房费。</li>
+  </div>
+
+  <div class="concl">
+    <h3>📊 两版硬碰硬（机票为飞猪 9/27 实查）</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>对比项</th><th>🏠 住到 10/6（3晚）</th><th>🏠 住到 10/7（4晚）</th></tr>
+      <tr><td>去程</td><td colspan="2" style="text-align:center">10/2 中联航 KN5977，大兴 20:50 起飞 → 亚庇 08:45 落地（经停1）</td></tr>
+      <tr><td>回程</td><td>10/6 亚航 AK1510，07:25 起飞 → 北京 16:15（经停1）</td><td>10/7 亚航 AK1560，18:00 起飞 → 北京 23:15（<b>直飞</b>）</td></tr>
+      <tr class="hl"><td>机票（2人）</td><td class="num">¥11,702</td><td class="num">¥12,814</td></tr>
+      <tr><td>酒店（中档 加亚娜）</td><td class="num">3晚 ¥4,656</td><td class="num">4晚 ¥6,208</td></tr>
+      <tr class="hl"><td><b>2人合计（中档）</b></td><td class="num">≈¥16,358</td><td class="num">≈¥19,022</td></tr>
+      <tr><td>实际在海边</td><td>3 个整天（10/3-10/5）</td><td>4 个整天（10/3-10/6）+ 10/7 半天</td></tr>
+      <tr><td>到京时间</td><td><b>10/6 16:15</b>（提前一天）</td><td>10/7 23:15（当晚）</td></tr>
+    </table>
+    </div>
+  </div>
+
+  <div class="concl">
+    <h3>💰 两版 × 三档预算（2人）</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>档位</th><th>酒店</th><th>住到 10/6（3晚）</th><th>住到 10/7（4晚）</th></tr>
+      <tr><td>💰 省着玩</td><td>佳蓝汶莱度假村 ¥666/晚</td><td class="num">≈¥13,700</td><td class="num">≈¥15,478</td></tr>
+      <tr class="hl"><td>⭐ 推荐</td><td>加亚娜海滨度假酒店 ¥1,552/晚</td><td class="num">≈¥16,358</td><td class="num">≈¥19,022</td></tr>
+      <tr><td>🌴 舒适</td><td>麦哲伦丝绸度假村 ¥2,295/晚</td><td class="num">≈¥18,587</td><td class="num">≈¥21,994</td></tr>
+      <tr><td>👑 顶级</td><td>丹绒亚路香格里拉 ¥4,913/晚</td><td class="num">≈¥27,587</td><td class="num">≈¥32,466</td></tr>
+    </table>
+    </div>
+    <div class="fine">💡 想控制在「每晚 1000 元」内：住到 7 号选<b>佳蓝汶莱（¥666/晚）</b>或市区五星<b>绿蔓（¥1,334）</b>；住到 6 号选佳蓝汶莱最轻松。</div>
+  </div>
+</section>
+
+<!-- ============ 机票 ============ -->
+<section class="panel" id="pf">
+  <h2 class="sect">✈️ 去程 · 10月2日<span class="sub">北京 → 亚庇（BKI）· 直飞只有凌晨一班</span></h2>
+
+  <div class="flight">
+    <div class="top">
+      <div><div class="no">中联航 KN5977 <span class="pill stop">经停 1 次</span></div><div class="air">大兴 → 哥打京那巴鲁 · 10/2 20:50 起飞</div></div>
+      <div class="price">¥1,701<small>/人</small></div>
+    </div>
+    <div class="time"><b>20:50</b><span class="dur">11h55m</span><b>08:45<small style="font-size:10px">+1</small></b></div>
+    <div class="meta2"><span>⭐ 推荐 · 晚上飞机上睡，落地就是亚庇清晨</span></div>
+  </div>
+
+  <div class="flight">
+    <div class="top">
+      <div><div class="no">南航 CZ3194 <span class="pill stop">经停 1 次</span></div><div class="air">大兴 08:00 起飞 · 当天到</div></div>
+      <div class="price">¥2,873<small>/人</small></div>
+    </div>
+    <div class="time"><b>08:00</b><span class="dur">8h50m</span><b>16:50</b></div>
+    <div class="meta2"><span>上午走、当天下午到 · 不熬夜但贵 ¥1,172</span></div>
+  </div>
+
+  <div class="flight">
+    <div class="top">
+      <div><div class="no">国航 CA1724 <span class="pill stop">经停 1 次</span></div><div class="air">首都 17:45 起飞</div></div>
+      <div class="price">¥2,310<small>/人</small></div>
+    </div>
+    <div class="time"><b>17:45</b><span class="dur">8h20m</span><b>02:05<small style="font-size:10px">+1</small></b></div>
+    <div class="meta2"><span>傍晚走，落地凌晨 2 点</span></div>
+  </div>
+
+  <div class="concl">
+    <div class="fine">📌 北京→亚庇<b>直飞只有亚航 AK1561 一班：大兴 00:20 起飞、05:40 落地，¥1,769</b> —— 凌晨起飞，已按你的要求排除。</div>
+  </div>
+
+  <h2 class="sect">✈️ 回程 · 两版对比<span class="sub">10/6 回省 ¥556/人 · 10/7 回有直飞</span></h2>
+
+  <div class="flight">
+    <div class="top">
+      <div><div class="no">住到 6 号 · 亚航 AK1510 <span class="pill stop">经停 1 次</span></div><div class="air">哥打京那巴鲁 10/6 07:25 起飞</div></div>
+      <div class="price">¥4,150<small>/人</small></div>
+    </div>
+    <div class="time"><b>07:25</b><span class="dur">8h50m</span><b>16:15</b></div>
+    <div class="meta2"><span>当天 16:15 到北京 · 早上 5 点多就得去机场</span></div>
+  </div>
+
+  <div class="flight">
+    <div class="top">
+      <div><div class="no">住到 7 号 · 亚航 AK1560 <span class="pill direct">直飞</span></div><div class="air">哥打京那巴鲁 10/7 18:00 起飞</div></div>
+      <div class="price">¥4,706<small>/人</small></div>
+    </div>
+    <div class="time"><b>18:00</b><span class="dur">5h15m</span><b>23:15</b></div>
+    <div class="meta2"><span>直飞不用转机 · 10/7 白天还能玩，当晚 23:15 到北京</span></div>
+  </div>
+
+  <div class="concl">
+    <div class="fine">📌 10/7 其他回程：南航 CZ2194（亚庇 00:30 起飞、北京 09:40 到，¥5,492，凌晨走）；厦航 MF8642（13:05 起飞、22:10 到，¥6,585）。<b>直飞只有 AK1560 一班</b>。</div>
+  </div>
+</section>
+
+<!-- ============ 酒店 ============ -->
+<section class="panel" id="ph">
+  <h2 class="sect">🏝 海岛特色<span class="sub">住了就不想走的那种</span></h2>
+
+  <div class="hotel">
+    <div class="ph"><span class="zone">🏝 加雅岛 · 海洋公园内</span>
+      <img src="https://img.alicdn.com/imgextra/i3/6000000007752/O1CN019xd9Ip278TF6CjcUd_!!6000000007752-2-hotel.png" alt="加亚娜海滨度假酒店">
+    </div>
+    <div class="bd">
+      <div class="nm">加亚娜海滨度假酒店<span class="badge pick">沙巴最出片</span><span class="nm en">Gayana Marine Resort</span></div>
+      <div class="stars">★★★★★</div>
+      <div class="facts">
+        <span>飞猪 <b>¥1,542-1,552/晚</b></span>
+        <span>东姑阿都拉曼海洋公园内</span>
+        <span>需乘船入住（码头接送）</span>
+      </div>
+      <div class="price-row">
+        <span class="p">¥1,542<small>/晚 起</small></span>
+        <span class="per">3晚 ¥4,626 ｜ 4晚 ¥6,168 · 推门就是珊瑚海，水屋体验全亚庇最特别</span>
+      </div>
+      <a class="book fliggy" href="https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F10L2Jz" target="_blank">飞猪看房 →</a>
+    </div>
+  </div>
+
+  <div class="hotel">
+    <div class="ph"><span class="zone">🏖 丹绒亚路海滩</span>
+      <a href="https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F22IfVZ" target="_blank"><img src="https://dimg04.c-ctrip.com/images/200m0w000000kh2w30AF1_R_960_660_R5_D.jpg" alt="丹绒亚路香格里拉全景"><span class="cap">酒店全景（日落时分）</span></a>
+      <a href="https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F22IfVZ" target="_blank"><img src="https://dimg04.c-ctrip.com/images/200v16000000zpfc1BB06_R_960_660_R5_D.jpg" alt="丹绒亚路香格里拉客房"><span class="cap">客房</span></a>
+    </div>
+    <div class="bd">
+      <div class="nm">丹绒亚路香格里拉<span class="badge pick">日落之王</span><span class="nm en">Shangri-La Tanjung Aru</span></div>
+      <div class="stars">★★★★★</div>
+      <div class="facts">
+        <span>飞猪 <b>¥4,913-4,917/晚</b></span>
+        <span>498 间房 · 私人沙滩</span>
+        <span>自带水上乐园</span>
+      </div>
+      <div class="price-row">
+        <span class="p">¥4,913<small>/晚</small></span>
+        <span class="per">预算充足再冲 · 「世界三大日落」观赏点就在门口，亚庇最著名的酒店</span>
+      </div>
+      <a class="book fliggy" href="https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F22IfVZ" target="_blank">飞猪看房 →</a>
+      <a class="book" style="margin-left:8px" href="https://www.trip.com/hotels/detail/?cityId=1393&hotelId=706177&checkIn=2026-10-02&checkOut=2026-10-07&adult=2&crn=1&curr=CNY&locale=zh-CN" target="_blank">trip.com 比价 →</a>
+    </div>
+  </div>
+
+  <h2 class="sect">🌴 度假村<span class="sub">配套全 · 适合躺平+周边玩</span></h2>
+
+  <div class="hotel">
+    <div class="ph"><span class="zone">🏖 丝绸港</span>
+      <img src="https://img.alicdn.com/imgextra/i1/6000000004342/O1CN01UpedPv1hwgoaytSGO_!!6000000004342-2-hotel.png" alt="麦哲伦丝绸度假村">
+    </div>
+    <div class="bd">
+      <div class="nm">麦哲伦丝绸度假村<span class="badge pick">综合推荐</span><span class="nm en">The Magellan Sutera</span></div>
+      <div class="stars">★★★★★</div>
+      <div class="facts">
+        <span>飞猪 <b>¥2,295-2,301/晚</b></span>
+        <span>丝绸港综合度假区</span>
+        <span>自带码头 · 高尔夫 · 游艇会</span>
+      </div>
+      <div class="price-row">
+        <span class="p">¥2,295<small>/晚</small></span>
+        <span class="per">度假配套最全，去跳岛码头和市区都方便</span>
+      </div>
+      <a class="book fliggy" href="https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2dOBaS" target="_blank">飞猪看房 →</a>
+    </div>
+  </div>
+
+  <div class="hotel">
+    <div class="ph"><span class="zone">🏖 佳蓝汶莱海滩</span>
+      <img src="https://img.alicdn.com/imgextra/i2/6000000001751/O1CN01hyhN4e1Oo0Rx3qHIM_!!6000000001751-2-hotel.png" alt="佳蓝汶莱度假村">
+    </div>
+    <div class="bd">
+      <div class="nm">佳蓝汶莱度假村<span class="badge value">性价比之王</span><span class="nm en">Nexus Resort Karambunai</span></div>
+      <div class="stars">★★★★<span class="grey">★</span> <i style="font-size:11px;color:var(--ink-2)">高档型</i></div>
+      <div class="facts">
+        <span>飞猪 <b>¥666/晚</b></span>
+        <span>Karambunai 海滨</span>
+        <span>自带 6 公里私属沙滩</span>
+      </div>
+      <div class="price-row">
+        <span class="p">¥666<small>/晚</small></span>
+        <span class="per">五星海景、经济型价格，离市区约 30 分钟（偏，适合纯躺平）</span>
+      </div>
+      <a class="book fliggy" href="https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4Lup4X" target="_blank">飞猪看房 →</a>
+    </div>
+  </div>
+
+  <h2 class="sect">🏙 市区<span class="sub">离跳岛码头和加雅街近</span></h2>
+  <div class="two">
+    <div class="hotel">
+      <div class="ph"><img src="https://img.alicdn.com/imgextra/i1/6000000007866/O1CN012u74Lq27ygOZO5sSg_!!6000000007866-0-hotel.jpg" alt="亚庇希尔顿"></div>
+      <div class="bd">
+        <div class="nm">亚庇希尔顿 Hilton</div>
+        <div class="stars">★★★★★</div>
+        <div class="facts"><span>飞猪 <b>¥1,401-1,505/晚</b></span><span>近加雅街</span></div>
+        <div class="price-row"><span class="p">¥1,401<small>/晚 起</small></span></div>
+        <a class="book fliggy" href="https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1heIAY" target="_blank">飞猪看房 →</a>
+      </div>
+    </div>
+    <div class="hotel">
+      <div class="ph"><img src="https://img.alicdn.com/imgextra/i4/6000000006631/O1CN012TwDh31yr3FYklGZU_!!6000000006631-2-hotel.png" alt="绿蔓酒店"></div>
+      <div class="bd">
+        <div class="nm">绿蔓酒店 The Luma</div>
+        <div class="stars">★★★★<span class="grey">★</span></div>
+        <div class="facts"><span>飞猪 <b>¥1,334-1,641/晚</b></span><span>万豪设计酒店成员</span></div>
+        <div class="price-row"><span class="p">¥1,334<small>/晚 起</small></span></div>
+        <a class="book fliggy" href="https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1B8CUx" target="_blank">飞猪看房 →</a>
+      </div>
+    </div>
+  </div>
+  <div class="concl" style="margin-top:16px">
+    <div class="fine">💡 市区还有：京那巴鲁凯悦 ¥2,189/晚、哥打京那巴鲁喜来登 ¥2,304/晚、哥打京那巴鲁美居 ¥519/晚、亚庇凯城 ¥698/晚。市区住的逻辑：走几步就是哲斯顿码头（跳岛出发点）和加雅街美食区。</div>
+  </div>
+</section>
+
+<!-- ============ 行程 ============ -->
+<section class="panel" id="pi">
+  <h2 class="sect">🗓 住到 10/7 版（4晚 · 推荐）</h2>
+  <div class="concl">
+    <li><b>10/2 晚</b>：大兴 20:50 起飞（KN5977），机上睡</li>
+    <li><b>D1 · 10/3</b>：08:45 落地 → 酒店补觉/放行李 → 下午加雅街 + 水上清真寺 → <b>傍晚丹绒亚路海滩日落</b>（亚庇招牌，别错过）</li>
+    <li><b>D2 · 10/4</b>：<b>东姑阿都拉曼海洋公园跳岛</b> —— 沙比岛 + 曼奴干岛浮潜，哲斯顿码头 15-20 分钟船程，下午回市区吃海鲜</li>
+    <li><b>D3 · 10/5</b>：<b>美人鱼岛一日游</b>（浮潜圣地，车程+船程较远，早出晚归）或 迪加岛火山泥浴</li>
+    <li><b>D4 · 10/6</b>：红树林萤火虫半日游（下午出发、晚上看萤火虫）或 京那巴鲁山脚（波令温泉+树顶吊桥）</li>
+    <li><b>D5 · 10/7</b>：白天加雅街采购手信 / 酒店泳池躺平 → <b>18:00 直飞回京，23:15 落地大兴</b></li>
+  </div>
+
+  <h2 class="sect">🗓 住到 10/6 版（3晚 · 压缩版）</h2>
+  <div class="concl">
+    <li><b>10/2 晚</b>：大兴 20:50 起飞</li>
+    <li><b>D1 · 10/3</b>：08:45 落地入住 → 下午市区 + 丹绒亚路日落</li>
+    <li><b>D2 · 10/4</b>：跳岛一日（沙比岛 + 曼奴干岛）</li>
+    <li><b>D3 · 10/5</b>：上午红树林萤火虫（或加雅街市集）→ 下午市区采购 → <b>早睡</b></li>
+    <li><b>D4 · 10/6</b>：约 05:00 出发去机场 → <b>07:25 起飞</b> → 16:15 落地北京</li>
+    <div class="fine">⚠️ 这版砍掉了美人鱼岛和神山，只剩 2 个整天可玩；且回程早班机，最后一天基本废掉。除非 7 号有硬安排，不然小欣建议住到 7 号。</div>
+  </div>
+
+  <div class="concl">
+    <h3>🐬 亚庇玩什么（按推荐度排序）</h3>
+    <li><b>跳岛浮潜</b>：东姑阿都拉曼海洋公园（沙比岛/曼奴干岛/马穆迪岛），码头买票按岛计费 + 上岛保育费，浮潜装备可租</li>
+    <li><b>美人鱼岛</b>：离市区远（车程+船程约 3 小时），一般报一日游，水清沙白，浮潜好</li>
+    <li><b>丹绒亚路海滩日落</b>：号称世界三大日落之一，免费，傍晚去</li>
+    <li><b>红树林萤火虫</b>：Klias/Weston 红树林，下午出发晚上看萤火虫，含晚餐，一船难求要提前订</li>
+    <li><b>神山一日游</b>：京那巴鲁公园 + 波令温泉 + 树顶吊桥，车程单程约 2 小时</li>
+    <li><b>市区逛吃</b>：加雅街（周日市集最有名）、水上清真寺、沙巴大学粉红清真寺、大茄来海鲜</li>
+  </div>
+</section>
+
+<!-- ============ 贴士 ============ -->
+<section class="panel" id="pt">
+  <div class="concl">
+    <h3>🧳 实用贴士</h3>
+    <li><b>签证</b>：中国公民赴马来西亚免签（30 天），需提前填 <b>MDAC 电子入境卡</b>，建议出发前 3 天内在线提交。</li>
+    <li><b>货币</b>：马币 MYR，市区换汇比机场划算；跳岛、夜市多用现金。</li>
+    <li><b>海岛装备</b>：防晒霜（建议 reef-safe）、浮潜面镜、防水袋、驱蚊液、轻薄雨衣。</li>
+    <li><b>交通</b>：市区 Grab 打车便宜；去跳岛到哲斯顿码头（Jesselton Point）；去佳蓝汶莱/神山建议包车或报一日游。</li>
+    <li><b>住宿逻辑</b>：住市区 = 吃喝跳岛方便；住丹绒亚路/佳蓝汶莱 = 酒店本身是景点；住加雅岛 = 水上屋体验但进出都要坐船。</li>
+    <li><b>十月天气</b>：亚庇 24-32°C，降雨 281mm/23 天，多为午后短时阵雨，上午出海一般没问题；雨季备雨具。</li>
+    <li><b>时差</b>：与北京时间无时差。</li>
+  </div>
+
+  <div class="concl">
+    <h3>⚠️ 出发前请确认（小欣没法替你核实的）</h3>
+    <li>航班时刻与价格会变，<b>以航司/飞猪实付为准</b>；回程两版都是亚航，廉价航空行李额需另购，注意核对。</li>
+    <li>马来西亚免签与 MDAC 要求可能调整，出行前查最新官方公告。</li>
+    <li>十月雨季，出海可能因风浪取消，跳岛尽量排行程前段。</li>
+    <li>国庆期间酒店可能上浮或满房，尽快锁定；加亚娜上岛需确认最后一班船时间。</li>
+  </div>
+
+  <div class="concl">
+    <h3>📋 实测账本（飞猪 2026-09-27 查询，人民币）</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>段</th><th>酒店</th><th>日期段</th><th>每晚价</th></tr>
+      <tr><td>机票</td><td>中联航 KN5977（北京→亚庇）</td><td>10/2</td><td class="num">¥1,701/人</td></tr>
+      <tr><td>机票</td><td>亚航 AK1510（亚庇→北京）</td><td>10/6</td><td class="num">¥4,150/人</td></tr>
+      <tr><td>机票</td><td>亚航 AK1560（亚庇→北京 直飞）</td><td>10/7</td><td class="num">¥4,706/人</td></tr>
+      <tr><td>酒店</td><td>加亚娜海滨度假酒店</td><td>10/2-10/6</td><td class="num">¥1,542/晚</td></tr>
+      <tr><td>酒店</td><td>麦哲伦丝绸度假村</td><td>10/2-10/6</td><td class="num">¥2,301/晚</td></tr>
+      <tr><td>酒店</td><td>丹绒亚路香格里拉</td><td>10/2-10/6</td><td class="num">¥4,917/晚</td></tr>
+      <tr><td>酒店</td><td>绿蔓酒店</td><td>10/2-10/6</td><td class="num">¥1,641/晚</td></tr>
+      <tr><td>酒店</td><td>亚庇希尔顿</td><td>10/2-10/6</td><td class="num">¥1,505/晚</td></tr>
+    </table>
+    </div>
+    <div class="fine">📌 6晚档（10/2-10/8）参考价：加亚娜 ¥1,552、麦哲伦 ¥2,295、丹绒亚路 ¥4,913、绿蔓 ¥1,334、希尔顿 ¥1,401 —— 两个日期段每晚价基本持平。</div>
+  </div>
+</section>
+
+<div class="footer">
+  机票均为 <b>北京出发</b>（首都 PEK / 大兴 PKX）· 数据来源：<a href="https://www.fliggy.com/" target="_blank">飞猪</a> · <a href="https://www.trip.com/hotels/list?city=1393&checkin=2026-10-02&checkout=2026-10-07&adult=2&crn=1&curr=CNY&locale=zh-CN" target="_blank">trip.com 亚庇酒店比价</a><br>
+  查询时间 2026-09-27 · 价格实时浮动，下单前请以页面实付为准 · 图片版权归各酒店/平台所有 · 页面由小欣生成 🌴
+</div>
+
+</div>
+
+<script>
+document.getElementById('tabs').addEventListener('click', e => {
+  const btn = e.target.closest('.tab');
+  if (!btn) return;
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t === btn));
+  document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === btn.dataset.p));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+</body>
+</html>
