@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>马来西亚十一海边方案 · 沙巴亚庇 6 天</title>
+<title>十一海边方案 · 三亚 vs 沙巴（10/7 必须回京版）</title>
 <style>
   :root{
     --sea:#0F4C5C; --sea-deep:#0A3541; --sand:#F6F3EC; --coral:#E36414;
     --ink:#22303A; --ink-2:#5B6B76; --line:#E4DDD0; --card:#FFFFFF; --ok:#1B7A4B;
-    --fliggy:#FF6A00;
+    --fliggy:#FF6A00; --win:#1B7A4B;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
@@ -36,6 +36,7 @@
   .route .seg span{font-size:11.5px;color:var(--ink-2)}
   .route .arrow{flex:0 0 34px;text-align:center;color:var(--coral);font-size:18px;font-weight:700}
   .sumline{display:flex;align-items:baseline;justify-content:space-between;background:var(--sea);color:#fff;border-radius:14px;padding:14px 18px;margin-bottom:18px}
+  .sumline.win{background:var(--win)}
   .sumline .lbl{font-size:13px;opacity:.9}
   .sumline .val{font-size:26px;font-weight:800;font-variant-numeric:tabular-nums}
   .sumline .val small{font-size:13px;font-weight:500;opacity:.85;margin-left:6px}
@@ -43,13 +44,9 @@
   h2.sect::before{content:"";width:4px;height:16px;border-radius:2px;background:var(--coral);display:inline-block}
   h2.sect .sub{font-size:11.5px;color:var(--ink-2);font-weight:500}
   .hotel{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-bottom:16px;box-shadow:0 1px 3px rgba(34,48,58,.05)}
-  .ph{position:relative;display:flex;gap:2px;background:#E8E2D6}
-  .ph a{flex:1;position:relative;aspect-ratio:16/10;overflow:hidden;display:block}
-  .ph a img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
-  .ph a:hover img{transform:scale(1.03)}
-  .ph a .cap{position:absolute;left:8px;bottom:8px;background:rgba(10,53,65,.82);color:#fff;font-size:10.5px;padding:2px 8px;border-radius:999px}
+  .ph{position:relative;background:#E8E2D6;display:flex;gap:2px}
+  .ph img{flex:1;min-width:0;width:0;aspect-ratio:16/10;object-fit:cover;display:block}
   .ph .zone{position:absolute;left:12px;top:12px;z-index:2;background:rgba(10,53,65,.85);color:#fff;font-size:11.5px;padding:3px 10px;border-radius:999px;backdrop-filter:blur(4px)}
-  .hotel .ph > img{flex:1;min-width:0;width:0;height:auto;aspect-ratio:16/10;object-fit:cover}
   .hotel .bd{padding:14px 16px 16px}
   .hotel .nm{font-size:17px;font-weight:800;color:var(--sea-deep);line-height:1.35}
   .hotel .stars{color:#E8A33D;font-size:13px;letter-spacing:2px}
@@ -63,13 +60,13 @@
   .price-row .per{font-size:12.5px;color:var(--ink-2)}
   .price-row .per b{color:var(--sea)}
   .book{display:inline-block;margin-top:10px;background:var(--sea);color:#fff;text-decoration:none;font-size:13px;font-weight:600;border-radius:10px;padding:8px 16px}
-  .book:active{background:var(--sea-deep)}
   .book.fliggy{background:var(--fliggy)}
   .badge{display:inline-block;font-size:11px;font-weight:700;border-radius:6px;padding:2px 8px;margin-left:8px;vertical-align:2px}
   .badge.pick{background:#FDEBD9;color:#B4520F}
   .badge.alt{background:#EDF2F5;color:var(--sea)}
   .badge.value{background:#E7F3EA;color:#1B7A4B}
   .concl{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:20px}
+  .concl.win{border-color:var(--win);border-width:2px}
   .concl h3{font-size:15px;font-weight:800;color:var(--sea-deep);margin-bottom:10px}
   .concl li{font-size:13.5px;color:var(--ink);margin:8px 0 8px 18px}
   .concl li b{color:var(--coral)}
@@ -80,21 +77,7 @@
   th{background:var(--sea);color:#fff;font-weight:600;font-size:12px;white-space:nowrap}
   td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:var(--sea-deep)}
   tr:last-child td{border-bottom:none}
-  .flight{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-bottom:12px}
-  .flight .top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-  .flight .no{font-size:14px;font-weight:800;color:var(--sea-deep)}
-  .flight .air{font-size:12px;color:var(--ink-2)}
-  .flight .time{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:14px}
-  .flight .time b{font-size:17px;font-weight:800;color:var(--sea-deep);font-variant-numeric:tabular-nums}
-  .flight .time .dur{font-size:11.5px;color:var(--ink-2);text-align:center;flex:1;border-top:1px dashed var(--line);padding-top:3px}
-  .flight .price{font-size:19px;font-weight:800;color:var(--coral);font-variant-numeric:tabular-nums;white-space:nowrap}
-  .flight .price small{font-size:11px;font-weight:600;color:var(--ink-2)}
-  .flight .meta2{display:flex;gap:6px 12px;flex-wrap:wrap;font-size:11.5px;color:var(--ink-2);margin-top:8px}
-  .pill{display:inline-block;font-size:10.5px;font-weight:700;border-radius:6px;padding:2px 7px}
-  .pill.direct{background:#E7F3EA;color:#1B7A4B}
-  .pill.stop{background:#F2F0EA;color:#7A6A55}
-  .bar{height:8px;border-radius:4px;background:#E9E3D8;overflow:hidden;margin-top:6px}
-  .bar i{display:block;height:100%;background:var(--coral);border-radius:4px}
+  tr.hl td{background:#F2F9F4}
   .footer{margin-top:28px;text-align:center;font-size:11.5px;color:var(--ink-2)}
   .footer a{color:var(--sea)}
   @media(min-width:640px){h1{font-size:30px}.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}.two .hotel{margin-bottom:0}}
@@ -104,371 +87,317 @@
 <div class="wrap">
 
 <header>
-  <span class="kicker">MALAYSIA BEACH PLAN · 十一假期</span>
-  <h1>马来西亚十一海边方案<span class="en">沙巴亚庇 Kota Kinabalu ｜ 海岛跳岛 + 世界级日落 ｜ 2026 国庆</span></h1>
+  <span class="kicker">SEA PLAN · 10/7 必须回京</span>
+  <h1>十一海边方案：三亚 vs 沙巴<span class="en">硬约束：10月7日必须到北京 ｜ 想去海边 ｜ 北京出发</span></h1>
   <div class="meta">
-    <span class="chip">📅 <b>10月2日</b> 出发 — <b>10月8日</b> 回（6晚）</span>
+    <span class="chip">📅 <b>10/2 出发</b> — <b>10/7 回京</b></span>
     <span class="chip">👥 2人</span>
-    <span class="chip">✈️ <b>北京出发</b> · 晚上 20:50 走 / 回程直飞</span>
-    <span class="chip">🏖 海边 + 跳岛</span>
+    <span class="chip">🏖 要海边</span>
+    <span class="chip">✈️ 北京出发</span>
   </div>
 </header>
 
 <div class="note">
-  📌 <b>数据口径</b>：机票/酒店价格为 <b>飞猪官方接口 2026-09-27 实时查询</b>（人民币、1 间 2 人）；酒店价为「每晚」含税参考价。trip.com 另标注处为携程国际版 6 晚总价实查。<b>价格实时浮动，下单前请以 App 实付为准</b>。<br>
-  ⚠️ <b>时间提醒</b>：距出发仅 4 天，国庆热门酒店房量紧张，看中建议尽快锁定。
+  📌 <b>数据口径</b>：飞猪官方接口 2026-09-27 实时查询，机票为人民币/人、酒店为每晚含税参考价（1间2人）。trip.com 处为携程国际版实查。<b>价格实时浮动，下单前以 App 实付为准</b>。<br>
+  ⚠️ 距出发 4 天，且 10/6-10/7 是国庆返程高峰，机票涨得凶，看中尽快锁。
 </div>
 
 <nav class="tabs" id="tabs">
-  <button class="tab active" data-p="pa">方案总览<span class="tag">推荐</span></button>
-  <button class="tab" data-p="ph">酒店推荐</button>
-  <button class="tab" data-p="pf">机票</button>
-  <button class="tab" data-p="pc">目的地对比</button>
+  <button class="tab active" data-p="pa">结论 · 去哪玩<span class="tag">先看这个</span></button>
+  <button class="tab" data-p="ps">方案一 · 三亚</button>
+  <button class="tab" data-p="pb">方案二 · 沙巴</button>
+  <button class="tab" data-p="pf">机票明细</button>
   <button class="tab" data-p="pt">行程与贴士</button>
 </nav>
 
-<!-- ============ 方案总览 ============ -->
+<!-- ============ 结论 ============ -->
 <section class="panel active" id="pa">
-  <div class="route">
-    <div class="seg"><b>北京大兴</b><span>10/2 20:50 起飞 · 中联航 KN5977</span></div>
-    <div class="arrow">→</div>
-    <div class="seg"><b>沙巴亚庇</b><span>10/3 08:45 落地 · 6晚</span></div>
-  </div>
-  <div class="sumline">
-    <span class="lbl">推荐方案：机票 + 中档海边酒店（6晚）</span>
-    <span class="val">≈ ¥1.8万<small>2人 · 含机票</small></span>
-  </div>
-
-  <div class="concl" style="margin-bottom:18px">
-    <h3>✈️ 关于起飞时间（已按你的要求重排）</h3>
-    <li>原来推荐的 04:05 亚航已<b>撤掉</b>。另外——<b>出发地已从上海更正为北京</b>，全部航班重查。</li>
-    <li>北京飞亚庇<b>直飞只有亚航 AK1561 一班，起飞时间 00:20</b>（比 4 点还早），所以只能排除。白天/傍晚出发都得中转 1 次。</li>
-    <li><b>新推荐</b>：去程 10/2 中联航 KN5977（大兴 20:50 起飞，¥1,701）+ 回程 10/8 亚航 AK1560（<b>直飞</b>，18:00 起飞 23:15 落地，¥2,677），两人 ¥8,756。</li>
-    <li>想完全不熬夜就选方案二：去程 10/2 南航 CZ3194（大兴 08:00 起飞、当天 16:50 到），两人机票 ¥11,100。</li>
+  <div class="concl win">
+    <h3>🎯 结论：这次建议去三亚（亚龙湾）</h3>
+    <li><b>你的硬约束是 10/7 必须到北京</b>，这一条把沙巴的性价比打没了 —— 10/6、10/7 正好是国庆返程高峰，从亚庇回北京的机票贵到 <b>¥4,150-4,706/人</b>（10/8 只要 ¥2,677，但你等不了）。</li>
+    <li><b>三亚全程直飞 4 小时</b>，北京大兴 06:55 起飞、10:55 落地，机票往返 ¥3,360/人，两人 <b>¥6,720</b>；沙巴两人机票 <b>¥12,814</b>，差 <b>¥6,094</b>。</li>
+    <li><b>天数还多一晚</b>：三亚 10/2-10/7 是 <b>5 晚</b>；沙巴因为去程是红眼航班，实际只有 <b>4 晚</b>。</li>
+    <li><b>十月天气三亚最好</b>：三亚 190mm / 14 个雨天，沙巴亚庇 281mm / 23 个雨天（兰卡威 344mm、槟城 340mm 更差）。</li>
+    <li><b>零手续成本</b>：不用签证、不用填 MDAC 入境卡、无时差、出问题随时能改签。</li>
   </div>
 
   <div class="concl">
-    <h3>🧭 为什么还是沙巴亚庇</h3>
-    <li><b>回程有直飞</b>：北京飞亚庇去程要中转，但回程亚航 AK1560 是直飞（5h15m，18:00 起飞、23:15 到北京），不用折腾两次。</li>
-    <li><b>十月最干</b>：亚庇十月降雨约 281mm，兰卡威 344mm、槟城 340mm（都是各自全年最湿月）。三个海边选项里亚庇最稳。</li>
-    <li><b>海边玩法最多</b>：东姑阿都拉曼海洋公园 5 座海岛（曼奴干/沙比/马穆迪等）离市区码头只要 15-20 分钟船程，当天来回跳岛；丹绒亚路海滩是全球知名日落观赏点。</li>
-    <li><b>对比其他选项</b>：兰卡威从北京出发全是 <b>2 次中转、12-14 小时</b>；槟城航班更好（东航 1 次中转 9h30m、¥1,651 起），但十月是全年最湿月，海滩质量也不如沙巴海岛。</li>
+    <h3>📊 两地硬碰硬</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>对比项</th><th>🥇 三亚（亚龙湾）</th><th>沙巴亚庇</th></tr>
+      <tr class="hl"><td>机票（2人）</td><td class="num">¥6,720</td><td class="num">¥12,814</td></tr>
+      <tr><td>航班</td><td>全程直飞 4h<br>去 06:55→10:55</td><td>去程 1 次中转<br>红眼 11h55m</td></tr>
+      <tr><td>回程落地北京</td><td>10/7 23:55</td><td>10/7 23:15</td></tr>
+      <tr class="hl"><td>可住晚数</td><td class="num">5 晚</td><td class="num">4 晚</td></tr>
+      <tr><td>十月降雨</td><td>190mm / 14 天</td><td>281mm / 23 天</td></tr>
+      <tr><td>酒店区间（/晚）</td><td>¥370 - ¥3,308</td><td>¥666 - ¥4,913</td></tr>
+      <tr><td>签证/手续</td><td>无</td><td>免签但需填 MDAC</td></tr>
+      <tr class="hl"><td><b>2人总预算（中档）</b></td><td class="num">≈¥10,600</td><td class="num">≈¥19,000</td></tr>
+    </table>
+    </div>
   </div>
 
-  <h2 class="sect">三档预算总账<span class="sub">机票固定 ¥8,756（2人）</span></h2>
-  <div class="tbl-wrap">
-  <table>
-    <tr><th>档位</th><th>住哪</th><th>酒店 6 晚</th><th>机票 2 人</th><th>合计</th></tr>
-    <tr><td>💰 省着玩</td><td>佳蓝汶莱度假村 ¥666/晚</td><td class="num">¥3,996</td><td class="num">¥8,756</td><td class="num">≈¥1.28万</td></tr>
-    <tr><td>⭐ 推荐</td><td>加亚娜海滨度假酒店 ¥1,552/晚</td><td class="num">¥9,312</td><td class="num">¥8,756</td><td class="num">≈¥1.81万</td></tr>
-    <tr><td>🌴 舒适</td><td>麦哲伦丝绸度假村 ¥2,295/晚</td><td class="num">¥13,770</td><td class="num">¥8,756</td><td class="num">≈¥2.25万</td></tr>
-    <tr><td>👑 顶级</td><td>丹绒亚路香格里拉 ¥4,913/晚</td><td class="num">¥29,478</td><td class="num">¥8,756</td><td class="num">≈¥3.82万</td></tr>
-  </table>
+  <div class="concl">
+    <h3>🤔 什么情况下还是选沙巴</h3>
+    <li>如果你<b>就是想出境</b>、想要海岛跳岛 + 浮潜看珊瑚 + 东南亚氛围，沙巴依然是三个马来西亚选项里最好的（兰卡威全是 2 次中转 12-14 小时；槟城十月全年最湿）。</li>
+    <li>但要有心理准备：<b>去程红眼 + 回程机票翻倍 + 少一晚</b>，两人多花约 <b>¥8,400</b>。</li>
+    <li>折中办法：<b>10/6 就回</b>（亚航 AK1510 07:25→16:15，¥4,150），两人机票降到 ¥11,702，但只剩 3 晚。</li>
   </div>
-  <div class="concl" style="margin-top:14px">
-    <div class="fine">💡 想压在「每晚 1000 元」这条线上，酒店选 <b>佳蓝汶莱度假村（¥666/晚）</b>或<b>绿蔓酒店（¥1,334/晚）</b>，机票+酒店合计约 1.28-1.7 万。想要海岛水上屋体验，加亚娜（¥1,552/晚）是最有记忆点的一档。</div>
+
+  <div class="concl">
+    <h3>💰 三亚两档预算（2人 5晚）</h3>
+    <div class="tbl-wrap">
+    <table>
+      <tr><th>档位</th><th>住哪</th><th>酒店 5 晚</th><th>机票 2 人</th><th>合计</th></tr>
+      <tr><td>💰 省着玩</td><td>三亚湾红树林（椰林）¥370/晚</td><td class="num">¥1,850</td><td class="num">¥6,720</td><td class="num">≈¥8,570</td></tr>
+      <tr class="hl"><td>⭐ 推荐</td><td>亚龙湾维景国际别墅 ¥784/晚</td><td class="num">¥3,920</td><td class="num">¥6,720</td><td class="num">≈¥10,640</td></tr>
+      <tr><td>🌴 舒适</td><td>亚龙湾红树林 ¥1,502/晚</td><td class="num">¥7,510</td><td class="num">¥6,720</td><td class="num">≈¥14,230</td></tr>
+      <tr><td>👑 顶级</td><td>亚特兰蒂斯 ¥3,308/晚</td><td class="num">¥16,540</td><td class="num">¥6,720</td><td class="num">≈¥23,260</td></tr>
+    </table>
+    </div>
   </div>
 </section>
 
-<!-- ============ 酒店推荐 ============ -->
-<section class="panel" id="ph">
-  <h2 class="sect">👑 顶级海边<span class="sub">香格里拉双雄 · 丹绒亚路日落</span></h2>
+<!-- ============ 三亚方案 ============ -->
+<section class="panel" id="ps">
+  <div class="route">
+    <div class="seg"><b>北京大兴</b><span>10/2 06:55 起飞 · 首都航空 JD5121（直飞）</span></div>
+    <div class="arrow">→</div>
+    <div class="seg"><b>三亚凤凰</b><span>10/2 10:55 落地 · 5晚</span></div>
+  </div>
+  <div class="sumline win">
+    <span class="lbl">推荐方案：机票 + 亚龙湾五星（5晚）</span>
+    <span class="val">≈ ¥1.06万<small>2人 · 含机票</small></span>
+  </div>
+
+  <div class="concl">
+    <h3>✈️ 机票（全程直飞）</h3>
+    <li><b>去</b>：10/2 首都航空 <b>JD5121</b>，大兴 06:55 起飞 → 三亚凤凰 10:55 落地，直飞 4h00m，<b>¥1,000/人</b></li>
+    <li><b>回</b>：10/7 首都航空 <b>JD5578</b>，三亚 20:10 起飞 → 大兴 23:55 落地，直飞 3h45m，<b>¥2,360/人</b></li>
+    <li><b>两人合计 ¥6,720</b>。去程上午飞、中午就到，落地就能玩；回程晚上飞，10/7 白天还能玩一整天，当天深夜到北京。</li>
+    <div class="fine">⚠️ 回程 23:55 落地，如果你 10/7 有安排，可换 CA1372（首都 18:00 起飞、22:15 到，¥2,690）或 CZ6717（大兴 17:55 起飞、22:10 到，¥2,910），提前 1.5-2 小时到京。</div>
+  </div>
+
+  <h2 class="sect">🏖 亚龙湾（海水最好 · 推荐住这里）</h2>
 
   <div class="hotel">
-    <div class="ph"><span class="zone">🏖 丹绒亚路海滩</span>
-      <a href="https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F22IfVZ" target="_blank"><img src="https://dimg04.c-ctrip.com/images/200m0w000000kh2w30AF1_R_960_660_R5_D.jpg" alt="香格里拉丹绒亚路全景"><span class="cap">酒店全景（日落时分）</span></a>
-      <a href="https://www.trip.com/hotels/detail/?cityId=1393&hotelId=706177&checkIn=2026-10-02&checkOut=2026-10-08&adult=2&crn=1&curr=CNY&locale=zh-CN" target="_blank"><img src="https://dimg04.c-ctrip.com/images/200v16000000zpfc1BB06_R_960_660_R5_D.jpg" alt="香格里拉丹绒亚路客房"><span class="cap">客房</span></a>
+    <div class="ph"><span class="zone">🏖 亚龙湾</span>
+      <img src="https://img.alicdn.com/imgextra/i4/6000000003711/O1CN01wRAWKo1dHgQVaeZ5D_!!6000000003711-0-hotel.jpg" alt="亚龙湾维景国际别墅度假酒店">
     </div>
     <div class="bd">
-      <div class="nm">丹绒亚路香格里拉 Shangri-La Tanjung Aru<span class="badge pick">日落首选</span></div>
+      <div class="nm">三亚亚龙湾维景国际别墅度假酒店<span class="badge pick">推荐</span></div>
+      <div class="stars">★★★★★ <i style="font-size:11px;color:var(--ink-2)">五星级</i></div>
+      <div class="facts"><span>飞猪 <b>¥784/晚</b></span><span>亚龙湾国家旅游度假区</span><span>别墅房型</span></div>
+      <div class="price-row">
+        <span class="p">¥784<small>/晚</small></span>
+        <span class="per">5晚约 <b>¥3,920</b> · 亚龙湾五星里最划算的一档，性价比之王</span>
+      </div>
+      <a class="book fliggy" href="https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3jkXXm" target="_blank">飞猪看房 →</a>
+    </div>
+  </div>
+
+  <div class="hotel">
+    <div class="ph"><span class="zone">🏖 亚龙湾</span>
+      <img src="https://img.alicdn.com/imgextra/i4/6000000004215/O1CN01vpbq9L1h0W7o3K8Yj_!!6000000004215-0-hotel.jpg" alt="亚龙湾迎宾馆">
+    </div>
+    <div class="bd">
+      <div class="nm">三亚亚龙湾迎宾馆<span class="badge alt">中档优选</span></div>
       <div class="stars">★★★★★</div>
-      <div class="facts">
-        <span>飞猪 <b>¥4,913/晚</b></span>
-        <span>丹绒亚路海滩 · 498 间房</span>
-        <span>自带水上乐园 · 私人沙滩</span>
-      </div>
+      <div class="facts"><span>飞猪 <b>¥948/晚</b></span><span>亚龙湾国家旅游度假区</span><span>私家沙滩</span></div>
       <div class="price-row">
-        <span class="p">¥4,913<small>/晚</small></span>
-        <span class="per">6晚约 <b>¥29,478</b> · 亚庇「全球三大日落」观赏点就在门口，亲子设施最全</span>
+        <span class="p">¥948<small>/晚</small></span>
+        <span class="per">5晚约 <b>¥4,740</b> · 老牌亚龙湾五星，沙滩质量好</span>
       </div>
-      <a class="book fliggy" href="https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F22IfVZ" target="_blank">飞猪看房 →</a>
-      <a class="book" style="margin-left:8px" href="https://www.trip.com/hotels/detail/?cityId=1393&hotelId=706177&checkIn=2026-10-02&checkOut=2026-10-08&adult=2&crn=1&curr=CNY&locale=zh-CN" target="_blank">trip.com 比价 →</a>
+      <a class="book fliggy" href="https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F3ItZlj" target="_blank">飞猪看房 →</a>
     </div>
   </div>
 
   <div class="hotel">
-    <div class="ph"><span class="zone">🏖 达利特湾</span>
-      <a href="https://www.trip.com/hotels/detail/?cityId=1393&hotelId=706202&checkIn=2026-10-02&checkOut=2026-10-08&adult=2&crn=1&curr=CNY&locale=zh-CN" target="_blank"><img src="https://dimg04.c-ctrip.com/images/1mc1e12000ng1mgvjAE11_R_960_660_R5_D.jpg" alt="莎利雅香格里拉泳池"><span class="cap">泳池区航拍</span></a>
-      <a href="https://www.trip.com/hotels/detail/?cityId=1393&hotelId=706202&checkIn=2026-10-02&checkOut=2026-10-08&adult=2&crn=1&curr=CNY&locale=zh-CN" target="_blank"><img src="https://dimg04.c-ctrip.com/images/1mc1d12000tlqrj214408_R_960_660_R5_D.jpg" alt="莎利雅香格里拉海景客房"><span class="cap">海景浴缸客房</span></a>
+    <div class="ph"><span class="zone">🏖 亚龙湾</span>
+      <img src="https://img.alicdn.com/imgextra/i1/O1CN01A3Ds3i1cMRQsf72YZ_!!4611686018427383298-0-fliggy_content_upload_image.jpg" alt="亚龙湾红树林度假酒店">
     </div>
     <div class="bd">
-      <div class="nm">莎利雅香格里拉 Shangri-La Rasa Ria<span class="badge pick">原生态</span></div>
-      <div class="stars">★★★★★ <span class="score">9.2</span></div>
-      <div class="facts">
-        <span>trip.com <b>US$2,009 / 6晚</b>（≈¥2,378/晚）</span>
-        <span>1,346 条点评</span>
-        <span>自有自然保护区 + 3公里私属海滩</span>
-      </div>
+      <div class="nm">三亚亚龙湾红树林度假酒店<span class="badge alt">舒适升级</span></div>
+      <div class="stars">★★★★★ <i style="font-size:11px;color:var(--ink-2)">五星级</i></div>
+      <div class="facts"><span>飞猪 <b>¥1,502/晚</b></span><span>亚龙湾国家旅游度假区</span></div>
       <div class="price-row">
-        <span class="p">≈¥2,378<small>/晚</small></span>
-        <span class="per">6晚约 <b>¥14,268</b> · 比丹绒亚路便宜一半，胜在有雨林保护区和红毛猩猩保育中心</span>
+        <span class="p">¥1,502<small>/晚</small></span>
+        <span class="per">5晚约 <b>¥7,510</b> · 园林大、亲子设施全</span>
       </div>
-      <a class="book" href="https://www.trip.com/hotels/detail/?cityId=1393&hotelId=706202&checkIn=2026-10-02&checkOut=2026-10-08&adult=2&crn=1&curr=CNY&locale=zh-CN" target="_blank">trip.com 看房 →</a>
+      <a class="book fliggy" href="https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4G0A7L" target="_blank">飞猪看房 →</a>
     </div>
   </div>
 
-  <h2 class="sect">🌴 品质海边<span class="sub">性价比更好的度假村</span></h2>
-
   <div class="hotel">
-    <div class="ph"><span class="zone">🏖 丝绸港</span>
-      <img src="https://img.alicdn.com/imgextra/i1/6000000004342/O1CN01UpedPv1hwgoaytSGO_!!6000000004342-2-hotel.png" alt="麦哲伦丝绸度假村">
+    <div class="ph"><span class="zone">🏖 亚龙湾</span>
+      <img src="https://img.alicdn.com/imgextra/i3/6000000005753/O1CN01tQo1C51sMvDdPWeHs_!!6000000005753-0-hotel.jpg" alt="亚龙湾希尔顿">
     </div>
     <div class="bd">
-      <div class="nm">麦哲伦丝绸度假村 The Magellan Sutera<span class="badge pick">综合推荐</span></div>
+      <div class="nm">三亚亚龙湾希尔顿酒店<span class="badge alt">大牌</span></div>
       <div class="stars">★★★★★</div>
-      <div class="facts"><span>飞猪 <b>¥2,295/晚</b></span><span>丝绸港综合度假区</span><span>自带码头 · 高尔夫 · 游艇会</span></div>
+      <div class="facts"><span>飞猪 <b>¥1,667/晚</b></span><span>亚龙湾国家旅游度假区</span></div>
       <div class="price-row">
-        <span class="p">¥2,295<small>/晚</small></span>
-        <span class="per">6晚约 <b>¥13,770</b> · 度假区配套最全，去跳岛码头和市区都方便</span>
+        <span class="p">¥1,667<small>/晚</small></span>
+        <span class="per">5晚约 <b>¥8,335</b> · 国际连锁，服务标准化</span>
       </div>
-      <a class="book fliggy" href="https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2dOBaS" target="_blank">飞猪看房 →</a>
+      <a class="book fliggy" href="https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4e1FwF" target="_blank">飞猪看房 →</a>
     </div>
   </div>
 
+  <h2 class="sect">🌊 海棠湾 / 三亚湾<span class="sub">更省或更新的选择</span></h2>
+  <div class="two">
+    <div class="hotel">
+      <div class="ph"><span class="zone">海棠湾</span><img src="https://img.alicdn.com/imgextra/i1/6000000007762/O1CN019999rj27D3Iz2cwXN_!!6000000007762-0-hotel.jpg" alt="海棠湾希尔顿花园"></div>
+      <div class="bd">
+        <div class="nm">海棠湾希尔顿花园酒店</div>
+        <div class="stars">★★★★★</div>
+        <div class="facts"><span>飞猪 <b>¥681/晚</b></span><span>近后海村（冲浪圣地）</span></div>
+        <div class="price-row"><span class="p">¥681<small>/晚</small></span></div>
+        <a class="book fliggy" href="https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F11Z4fU" target="_blank">飞猪看房 →</a>
+      </div>
+    </div>
+    <div class="hotel">
+      <div class="ph"><span class="zone">三亚湾</span><img src="https://img.alicdn.com/imgextra/i3/6000000004744/O1CN01VoZLzZ1kuo53fpLsh_!!6000000004744-0-hotel.jpg" alt="三亚湾希尔顿逸林"></div>
+      <div class="bd">
+        <div class="nm">三亚湾希尔顿逸林酒店</div>
+        <div class="stars">★★★★★</div>
+        <div class="facts"><span>飞猪 <b>¥619/晚</b></span><span>近三亚湾路 · 椰梦长廊日落</span></div>
+        <div class="price-row"><span class="p">¥619<small>/晚</small></span></div>
+        <a class="book fliggy" href="https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2Hijz8" target="_blank">飞猪看房 →</a>
+      </div>
+    </div>
+  </div>
+  <div class="concl" style="margin-top:16px">
+    <div class="fine">💡 三亚湾最便宜（红树林椰林酒店 ¥370/晚，5晚 ¥1,850），但海水一般、主要是看日落和逛吃；<b>想玩海还是住亚龙湾</b>。海棠湾新酒店多、近后海村（冲浪），但离市区远。<b>亚特兰蒂斯 ¥3,308/晚</b> 含水世界乐园，预算够可以冲。</div>
+  </div>
+</section>
+
+<!-- ============ 沙巴方案 ============ -->
+<section class="panel" id="pb">
+  <div class="route">
+    <div class="seg"><b>北京大兴</b><span>10/2 20:50 起飞 · 中联航 KN5977</span></div>
+    <div class="arrow">→</div>
+    <div class="seg"><b>沙巴亚庇</b><span>10/3 08:45 落地 · 4晚</span></div>
+  </div>
+  <div class="sumline">
+    <span class="lbl">原方案修订版：机票 + 亚龙湾同级酒店（4晚）</span>
+    <span class="val">≈ ¥1.9万<small>2人 · 含机票</small></span>
+  </div>
+
+  <div class="concl">
+    <h3>✈️ 机票（受 10/7 返程高峰影响）</h3>
+    <li><b>去</b>：10/2 中联航 <b>KN5977</b>，大兴 20:50 起飞 → 亚庇 08:45 落地（+1），经停 1 次 11h55m，<b>¥1,701/人</b></li>
+    <li><b>回</b>：10/7 亚航 <b>AK1560</b>，亚庇 18:00 起飞 → 大兴 23:15 落地，直飞 5h15m，<b>¥4,706/人</b>（10/8 只要 ¥2,677，但 7 号必须回就享受不到）</li>
+    <li><b>两人合计 ¥12,814</b>，比三亚贵 <b>¥6,094</b>。</li>
+    <div class="fine">📌 北京飞亚庇直飞只有亚航 AK1561（00:20 起飞），白天走都得中转；回程 10/7 直飞只有 AK1560 一班，所以价格没得挑。</div>
+  </div>
+
+  <h2 class="sect">🏝 沙巴海边酒店<span class="sub">价格与出发地无关，沿用之前实查</span></h2>
   <div class="hotel">
     <div class="ph"><span class="zone">🏝 东姑阿都拉曼海洋公园</span>
       <img src="https://img.alicdn.com/imgextra/i3/6000000007752/O1CN019xd9Ip278TF6CjcUd_!!6000000007752-2-hotel.png" alt="加亚娜海滨度假酒店">
     </div>
     <div class="bd">
-      <div class="nm">加亚娜海滨度假酒店 Gayana Marine Resort<span class="badge pick">最出片</span></div>
+      <div class="nm">加亚娜海滨度假酒店 Gayana Marine Resort<span class="badge pick">沙巴首选</span></div>
       <div class="stars">★★★★★</div>
-      <div class="facts"><span>飞猪 <b>¥1,552/晚</b></span><span>加雅岛 · 海洋公园内</span><span>海岛水上屋 · 需乘船入住</span></div>
+      <div class="facts"><span>飞猪 <b>¥1,552/晚</b></span><span>加雅岛 · 海岛水上屋</span></div>
       <div class="price-row">
         <span class="p">¥1,552<small>/晚</small></span>
-        <span class="per">6晚约 <b>¥9,312</b> · 五千里挑一的「水上屋」体验，推门就是珊瑚海</span>
+        <span class="per">4晚约 <b>¥6,208</b> · 推门就是珊瑚海，但 4 晚只够玩 3 天</span>
       </div>
       <a class="book fliggy" href="https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F10L2Jz" target="_blank">飞猪看房 →</a>
     </div>
   </div>
-
-  <div class="hotel">
-    <div class="ph"><span class="zone">🏖 近丝绸港</span>
-      <img src="https://img.alicdn.com/imgextra/i4/6000000006631/O1CN012TwDh31yr3FYklGZU_!!6000000006631-2-hotel.png" alt="绿蔓酒店">
-    </div>
-    <div class="bd">
-      <div class="nm">绿蔓酒店 The Luma Hotel<span class="badge alt">万豪设计酒店</span></div>
-      <div class="stars">★★★★<span class="grey">★</span> <i style="font-size:11px;color:var(--ink-2)">高档型</i></div>
-      <div class="facts"><span>飞猪 <b>¥1,334/晚</b></span><span>Sutera Avenue</span><span>万豪旅享家设计酒店成员</span></div>
-      <div class="price-row">
-        <span class="p">¥1,334<small>/晚</small></span>
-        <span class="per">6晚约 <b>¥8,004</b> · 设计感强、可攒万豪积分，位置在丝绸港与市区之间</span>
-      </div>
-      <a class="book fliggy" href="https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1B8CUx" target="_blank">飞猪看房 →</a>
-    </div>
-  </div>
-
-  <h2 class="sect">💰 省着玩<span class="sub">预算友好，同样在海边</span></h2>
-
   <div class="hotel">
     <div class="ph"><span class="zone">🏖 佳蓝汶莱海滩</span>
       <img src="https://img.alicdn.com/imgextra/i2/6000000001751/O1CN01hyhN4e1Oo0Rx3qHIM_!!6000000001751-2-hotel.png" alt="佳蓝汶莱度假村">
     </div>
     <div class="bd">
-      <div class="nm">佳蓝汶莱度假村 Nexus Resort Karambunai<span class="badge value">性价比之王</span></div>
-      <div class="stars">★★★★<span class="grey">★</span> <i style="font-size:11px;color:var(--ink-2)">高档型</i></div>
-      <div class="facts"><span>飞猪 <b>¥666/晚</b></span><span>Karambunai 海滨</span><span>自带 6 公里私属沙滩</span></div>
+      <div class="nm">佳蓝汶莱度假村 Nexus Resort Karambunai<span class="badge value">省着玩</span></div>
+      <div class="stars">★★★★<span class="grey">★</span></div>
+      <div class="facts"><span>飞猪 <b>¥666/晚</b></span><span>Karambunai 海滨 · 6km 私属沙滩</span></div>
       <div class="price-row">
         <span class="p">¥666<small>/晚</small></span>
-        <span class="per">6晚约 <b>¥3,996</b> · 五星级海景、经济型价格，离市区约 30 分钟</span>
+        <span class="per">4晚约 <b>¥2,664</b> · 沙巴省钱首选</span>
       </div>
       <a class="book fliggy" href="https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F4Lup4X" target="_blank">飞猪看房 →</a>
     </div>
   </div>
-
-  <h2 class="sect">🏙 市区备选<span class="sub">离跳岛码头近，逛吃方便</span></h2>
-  <div class="two">
-    <div class="hotel">
-      <div class="ph"><img src="https://img.alicdn.com/imgextra/i1/6000000007866/O1CN012u74Lq27ygOZO5sSg_!!6000000007866-0-hotel.jpg" alt="亚庇希尔顿"></div>
-      <div class="bd">
-        <div class="nm">亚庇希尔顿 Hilton</div>
-        <div class="stars">★★★★★</div>
-        <div class="facts"><span>飞猪 <b>¥1,401/晚</b></span><span>近加雅街</span></div>
-        <div class="price-row"><span class="p">¥1,401<small>/晚</small></span></div>
-        <a class="book fliggy" href="https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F1heIAY" target="_blank">飞猪看房 →</a>
-      </div>
-    </div>
-    <div class="hotel">
-      <div class="ph"><img src="https://img.alicdn.com/imgextra/i1/6000000002635/O1CN01eNvZI51VKsWfsGi3h_!!6000000002635-0-hotel.jpg" alt="京那巴鲁凯悦"></div>
-      <div class="bd">
-        <div class="nm">京那巴鲁凯悦 Hyatt Centric</div>
-        <div class="stars">★★★★★</div>
-        <div class="facts"><span>飞猪 <b>¥2,189/晚</b></span><span>近加雅街</span></div>
-        <div class="price-row"><span class="p">¥2,189<small>/晚</small></span></div>
-        <a class="book fliggy" href="https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F18b5Kl" target="_blank">飞猪看房 →</a>
-      </div>
-    </div>
-  </div>
-  <div class="concl" style="margin-top:16px">
-    <div class="fine">💡 市区还有更省的：哥打京那巴鲁市中心美居 ¥519/晚、亚庇凯城酒店 ¥698/晚、哥打京那巴鲁喜来登 ¥2,304/晚。市区住的好处是走几步就到哲斯顿码头（去海岛跳岛的出发点）和加雅街周日市集。</div>
+  <div class="concl">
+    <div class="fine">沙巴完整酒店清单（香格里拉丹绒亚路 ¥4,913、莎利雅香格里拉、麦哲伦丝绸 ¥2,295、绿蔓 ¥1,334 等）见上一版页面存档，价格未变。</div>
   </div>
 </section>
 
-<!-- ============ 机票 ============ -->
+<!-- ============ 机票明细 ============ -->
 <section class="panel" id="pf">
-  <div class="note" style="margin-top:0">
-    ⚠️ <b>已修正出发地：北京</b>（此前误按上海查询）。北京出发的航班格局和上海差别很大，下表全部重查。
-  </div>
-
-  <h2 class="sect">三个推荐组合<span class="sub">均已排除凌晨 00:20 那班</span></h2>
-
-  <div class="concl" style="margin-top:6px;border-color:#E36414;border-width:2px">
-    <h3>方案一 · 晚上走（最省）<span class="badge pick" style="margin-left:6px">推荐</span></h3>
-    <li><b>去</b>：10/2 中联航 <b>KN5977</b>，大兴 20:50 起飞 → 亚庇 08:45 落地（+1），经停 1 次 11h55m，<b>¥1,701/人</b></li>
-    <li><b>回</b>：10/8 亚航 <b>AK1560</b>，亚庇 18:00 起飞 → 大兴 23:15 落地，<b>直飞 5h15m</b>，<b>¥2,677/人</b></li>
-    <li><b>两人合计 ¥8,756</b>。晚上出发睡一觉就到，回程还是直飞、当晚就到家。</li>
-    <div class="fine">💡 去程是红眼航班（落地 10/3 早上 08:45），建议<b>酒店订 10/2 入住</b>，落地能直接进房补觉；回程 18:00 起飞，10/8 白天还能玩大半天，23:15 就落地北京。</div>
-  </div>
-
-  <div class="concl">
-    <h3>方案二 · 上午走（当天下午到 · 不熬夜）</h3>
-    <li><b>去</b>：10/2 南航 <b>CZ3194</b>，大兴 08:00 起飞 → 亚庇 16:50 落地，经停 1 次 8h50m，<b>¥2,873/人</b></li>
-    <li><b>回</b>：10/8 亚航 <b>AK1560</b>，亚庇 18:00 起飞 → 大兴 23:15 落地，直飞 5h15m，<b>¥2,677/人</b></li>
-    <li><b>两人合计 ¥11,100</b>。全程白天、当天到，比方案一贵 ¥2,344。</li>
-  </div>
-
-  <div class="concl">
-    <h3>方案三 · 下午走（当天深夜到）</h3>
-    <li><b>去</b>：10/2 首都航空 <b>JD5921</b>，大兴 17:40 起飞 → 亚庇 03:35 落地（+1），经停 1 次 9h55m，<b>¥1,942/人</b></li>
-    <li><b>回</b>：10/8 亚航 <b>AK1560</b>，亚庇 18:00 起飞 → 大兴 23:15 落地，直飞，<b>¥2,677/人</b></li>
-    <li><b>两人合计 ¥9,238</b>。下午出发，但落地是凌晨 3 点半。</li>
-  </div>
-
-  <h2 class="sect">北京 → 亚庇 全部班次<span class="sub">10/2 出发 · 直飞只有 1 班且是凌晨</span></h2>
+  <h2 class="sect">🥇 三亚 · 北京往返（全程直飞）<span class="sub">10/2 去 · 10/7 回</span></h2>
   <div class="tbl-wrap">
   <table>
-    <tr><th>时段</th><th>航班</th><th>起降</th><th>耗时</th><th>价格/人</th></tr>
-    <tr><td>🌑 凌晨<br><span style="font-size:10px">直飞</span></td><td>亚航 AK1561</td><td>大兴 00:20 → 05:40 当天</td><td>5h20m</td><td class="num">¥1,769</td></tr>
-    <tr><td rowspan="4">🌅 上午<br><span style="font-size:10px">6-12点</span></td><td><b>南航 CZ3194</b></td><td>大兴 08:00 → 16:50 当天</td><td>8h50m</td><td class="num">¥2,873</td></tr>
-    <tr><td>海航 HU7801</td><td>首都 08:30 → 18:20 当天</td><td>9h50m</td><td class="num">¥3,316</td></tr>
-    <tr><td>马航 MH319</td><td>大兴 10:00 → 21:35 当天</td><td>11h35m</td><td class="num">¥3,344</td></tr>
-    <tr><td>东航 MU5154</td><td>首都 11:30 → 00:30 +1</td><td>13h00m</td><td class="num">¥2,515</td></tr>
-    <tr><td rowspan="4">☀️ 下午<br><span style="font-size:10px">12-18点</span></td><td><b>首都航空 JD5921</b></td><td>大兴 17:40 → 03:35 +1</td><td>9h55m</td><td class="num">¥1,942</td></tr>
-    <tr><td>国航 CA1724</td><td>首都 17:45 → 02:05 +1</td><td>8h20m</td><td class="num">¥2,310</td></tr>
-    <tr><td>国航 CA1722</td><td>首都 16:45 → 02:05 +1</td><td>9h20m</td><td class="num">¥2,310</td></tr>
-    <tr><td>东航 MU5158</td><td>首都 14:30 → 00:30 +1</td><td>10h00m</td><td class="num">¥2,515</td></tr>
-    <tr><td rowspan="4">🌙 晚上<br><span style="font-size:10px">18-24点</span></td><td><b>中联航 KN5977</b></td><td>大兴 20:50 → 08:45 +1</td><td>11h55m</td><td class="num">¥1,701</td></tr>
-    <tr><td>东航 MU5166</td><td>首都 21:30 → 08:45 +1</td><td>11h15m</td><td class="num">¥1,753</td></tr>
-    <tr><td>国航 CA8341</td><td>大兴 22:00 → 08:45 +1</td><td>10h45m</td><td class="num">¥1,754</td></tr>
-    <tr><td>南航 CZ8882</td><td>大兴 21:20 → 08:45 +1</td><td>11h25m</td><td class="num">¥1,785</td></tr>
+    <tr><th>方向</th><th>航班</th><th>起降</th><th>耗时</th><th>价格/人</th></tr>
+    <tr class="hl"><td rowspan="4">去<br>10/2</td><td><b>首都航空 JD5121</b></td><td>大兴 06:55 → 凤凰 10:55</td><td>4h00m</td><td class="num">¥1,000</td></tr>
+    <tr><td>首都航空 JD5577</td><td>大兴 06:55 → 凤凰 11:00</td><td>4h05m</td><td class="num">¥1,000</td></tr>
+    <tr><td>南航 CZ6716</td><td>大兴 19:30 → 凤凰 23:45</td><td>4h15m</td><td class="num">¥1,180</td></tr>
+    <tr><td>南航 CZ6714</td><td>大兴 14:40 → 凤凰 18:40</td><td>4h00m</td><td class="num">¥1,340</td></tr>
+    <tr class="hl"><td rowspan="4">回<br>10/7</td><td><b>首都航空 JD5578</b></td><td>凤凰 20:10 → 大兴 23:55</td><td>3h45m</td><td class="num">¥2,360</td></tr>
+    <tr><td>南航 CZ6713</td><td>凤凰 19:50 → 大兴 23:55</td><td>4h05m</td><td class="num">¥2,430</td></tr>
+    <tr><td>国航 CA1372</td><td>凤凰 18:00 → 首都 22:15</td><td>4h15m</td><td class="num">¥2,690</td></tr>
+    <tr><td>南航 CZ6717</td><td>凤凰 17:55 → 大兴 22:10</td><td>4h15m</td><td class="num">¥2,910</td></tr>
   </table>
   </div>
   <div class="concl" style="margin-top:12px">
-    <div class="fine">📌 北京飞亚庇<b>直飞只有亚航 AK1561 一班，且是 00:20 起飞</b>（比 4 点还早），所以白天/傍晚出发都得中转 1 次。好消息是<b>回程有直飞</b>：亚航 AK1560 18:00 起飞、23:15 落地大兴。</div>
+    <div class="fine">📌 三亚航班密度高，去程最便宜的上午班只要 ¥1,000；回程 10/7 是返程高峰，最低 ¥2,360，但选择很多，可按你要到京的时间挑。</div>
   </div>
 
-  <h2 class="sect">亚庇 → 北京<span class="sub">10/8 回程</span></h2>
+  <h2 class="sect">🥈 沙巴 · 北京往返<span class="sub">10/2 去 · 10/7 回</span></h2>
   <div class="tbl-wrap">
   <table>
-    <tr><th>起飞</th><th>落地</th><th>航司航班</th><th>耗时</th><th>价格/人</th></tr>
-    <tr><td>18:00</td><td>23:15 当天</td><td><b>亚航 AK1560（直飞）</b></td><td>5h15m</td><td class="num">¥2,677</td></tr>
-    <tr><td>15:10</td><td>01:05 +1</td><td>亚航 AK5139（中转1次）</td><td>9h55m</td><td class="num">¥2,907</td></tr>
-    <tr><td>02:20</td><td>11:40 当天</td><td>春秋 9C8594（中转1次）</td><td>9h20m</td><td class="num">¥3,365</td></tr>
-    <tr><td>09:20</td><td>19:45 当天</td><td>亚航 AK1520（中转1次）</td><td>10h25m</td><td class="num">¥3,736</td></tr>
+    <tr><th>方向</th><th>航班</th><th>起降</th><th>耗时</th><th>价格/人</th></tr>
+    <tr><td rowspan="3">去<br>10/2</td><td><b>中联航 KN5977</b></td><td>大兴 20:50 → 亚庇 08:45 +1</td><td>11h55m</td><td class="num">¥1,701</td></tr>
+    <tr><td>南航 CZ3194</td><td>大兴 08:00 → 亚庇 16:50 当天</td><td>8h50m</td><td class="num">¥2,873</td></tr>
+    <tr><td>国航 CA1724</td><td>首都 17:45 → 亚庇 02:05 +1</td><td>8h20m</td><td class="num">¥2,310</td></tr>
+    <tr><td rowspan="3">回<br>10/7</td><td><b>亚航 AK1560（直飞）</b></td><td>亚庇 18:00 → 大兴 23:15</td><td>5h15m</td><td class="num">¥4,706</td></tr>
+    <tr><td>南航 CZ2194</td><td>亚庇 00:30 → 首都 09:40</td><td>9h10m</td><td class="num">¥5,492</td></tr>
+    <tr><td>厦航 MF8642</td><td>亚庇 13:05 → 大兴 22:10</td><td>9h05m</td><td class="num">¥6,585</td></tr>
   </table>
   </div>
   <div class="concl" style="margin-top:12px">
-    <div class="fine">📌 回程 <b>AK1560 直飞 ¥2,677 是性价比最高的选择</b>（傍晚起飞、当晚到家）。想省钱的话 10/9 回程厦航 MF8642 中转 1 次 ¥2,025，但要多住一晚。</div>
-  </div>
-
-  <div class="concl">
-    <h3>🔎 查询入口</h3>
-    <li>飞猪机票：<a href="https://www.fliggy.com/" target="_blank">fliggy.com</a>（搜「北京 → 哥打京那巴鲁」，输入航班号更准）</li>
-    <li>trip.com 机票：<a href="https://www.trip.com/flights/" target="_blank">trip.com/flights</a></li>
-    <li>建议两处都查一遍 —— 巴厘岛那次实测 trip.com 比飞猪便宜 3%~70%，机票也常有差异。</li>
-  </div>
-
-</section>
-
-<!-- ============ 目的地对比 ============ -->
-<section class="panel" id="pc">
-  <h2 class="sect">三地横向对比<span class="sub">同为马来西亚海边，差别很大</span></h2>
-  <div class="tbl-wrap">
-  <table>
-    <tr><th>目的地</th><th>北京往返航班</th><th>10月降雨</th><th>酒店价位（/晚）</th></tr>
-    <tr><td><b>沙巴亚庇</b><br><span style="font-size:11px;color:#1B7A4B">✔ 推荐</span></td><td>去程 1 次中转<br>8h50m-11h55m<br>¥1,701 起<br><b>回程有直飞</b> 5h15m ¥2,677</td><td>281mm<br>23 个雨天</td><td>¥666 - ¥4,913</td></tr>
-    <tr><td>兰卡威</td><td><span style="color:#B4520F">全部 2 次中转</span><br>12h05m-13h40m<br>¥2,016 起</td><td>344mm<br>26 个雨天<br><span style="font-size:11px;color:#B4520F">全年最湿月</span></td><td>¥194 - ¥1,846</td></tr>
-    <tr><td>槟城</td><td>经停 1 次 8h55m-9h30m<br>¥1,651 起（红眼）<br>白天班 14:00 起飞 ¥2,697</td><td>340mm<br>25 个雨天<br><span style="font-size:11px;color:#B4520F">全年最湿月</span></td><td>¥508 - ¥4,383</td></tr>
-  </table>
-  </div>
-
-  <div class="concl">
-    <h3>📊 怎么读这张表</h3>
-    <li><b>从北京出发，三个地方都要中转</b>：亚庇去程 1 次中转（8h50m-11h55m），但<b>回程有直飞</b>；槟城去程 1 次中转、耗时最短（8h55m）；兰卡威最差，全是 2 次中转、12-14 小时。</li>
-    <li><b>天气都不算完美</b>：十月是马来西亚雨季，三个地方都会下雨，但亚庇 281mm 是三者最低。注意这是「月累计降雨」，通常是午后短时阵雨，上午出海一般没问题。</li>
-    <li><b>兰卡威酒店最便宜</b>：¥194-1,846/晚，比沙巴低一档（威斯汀 ¥1,439、成功度假村 ¥1,452、丹绒鲁 ¥1,174）。但航班要转两次，不太划算。</li>
-    <li><b>槟城航班其实不错</b>：东航 MU5231 大兴 22:00 起飞、次日 07:30 到，1 次中转 9h30m，¥1,651 起；还有南航 CZ3186 下午 14:00 起飞、当晚 22:55 到（¥2,697）。如果更看重「美食+城市」，槟城值得考虑，但十月是它全年最湿月。</li>
-  </div>
-
-  <h2 class="sect">兰卡威酒店参考<span class="sub">万一想换目的地</span></h2>
-  <div class="two">
-    <div class="hotel">
-      <div class="ph"><img src="https://img.alicdn.com/imgextra/i3/6000000004236/O1CN01qWDbcd1hA8MRYENgG_!!6000000004236-0-hotel.jpg" alt="兰卡威威斯汀"></div>
-      <div class="bd">
-        <div class="nm">兰卡威威斯汀水疗度假酒店</div>
-        <div class="stars">★★★★★</div>
-        <div class="facts"><span>飞猪 <b>¥1,439/晚</b></span><span>近瓜镇码头</span></div>
-        <div class="price-row"><span class="p">¥1,439<small>/晚</small></span></div>
-        <a class="book fliggy" href="https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F0HJ8x9" target="_blank">飞猪看房 →</a>
-      </div>
-    </div>
-    <div class="hotel">
-      <div class="ph"><img src="https://img.alicdn.com/imgextra/i2/6000000007739/O1CN01VyZohX272W9QTAO6z_!!6000000007739-0-hotel.jpg" alt="兰卡威成功度假村"></div>
-      <div class="bd">
-        <div class="nm">兰卡威成功度假村</div>
-        <div class="stars">★★★★★</div>
-        <div class="facts"><span>飞猪 <b>¥1,452/晚</b></span><span>近空中缆车</span></div>
-        <div class="price-row"><span class="p">¥1,452<small>/晚</small></span></div>
-        <a class="book fliggy" href="https://router.feizhu.com/multi/webview?url=https%3A%2F%2Frouter.feizhu.com%2Fws%2F2Bg5Wa" target="_blank">飞猪看房 →</a>
-      </div>
-    </div>
+    <div class="fine">📌 沙巴 10/7 回程最便宜也要 ¥4,706（且是唯一航班），这就是被返程高峰卡住的地方。若能接受 10/6 回，亚航 AK1510（07:25→16:15）¥4,150，两人省 ¥1,112，但少一晚。</div>
   </div>
 </section>
 
 <!-- ============ 行程与贴士 ============ -->
 <section class="panel" id="pt">
   <div class="concl">
-    <h3>🗺 6 天怎么玩（以住市区/丝绸港为例）</h3>
-    <li><b>10/2 晚</b>：北京大兴 20:50 起飞（中联航 KN5977），机上睡一觉</li>
-    <li><b>D1（10/3）</b>：08:45 落地 → 打车进酒店补觉/放行李 → 下午加雅街 + 水上清真寺 → 傍晚丹绒亚路海滩看日落（亚庇招牌）</li>
-    <li><b>D2（10/4）</b>：东姑阿都拉曼海洋公园跳岛 —— 沙比岛 + 曼奴干岛浮潜，哲斯顿码头出发 15-20 分钟船程，下午回市区</li>
-    <li><b>D3（10/5）</b>：美人鱼岛 或 迪加岛一日游（含接送，早出晚归）</li>
-    <li><b>D4（10/6）</b>：京那巴鲁山脚一日游（波令温泉 + 树顶吊桥）或 亚庇市区美食 + 手工市场</li>
-    <li><b>D5（10/7）</b>：睡到自然醒 → 酒店泳池/沙滩日 → 下午马里马里文化村 或 红树林萤火虫夜游</li>
-    <li><b>D6（10/8）</b>：白天机动/补玩 → 18:00 直飞回北京（23:15 落地大兴）</li>
-    <div class="fine">💡 去程是红眼航班、10/3 早上 08:45 落地，酒店<b>建议订 10/2 入住、共 6 晚</b>（10/2-10/8）—— 这样早上到就能直接进房补觉；若只订 10/3 起，亚庇酒店普遍 14:00 后才能入住，得先寄存行李。</div>
+    <h3>🗺 三亚 5 天怎么玩（住亚龙湾）</h3>
+    <li><b>D1（10/2）</b>：06:55 起飞 → 10:55 落地 → 中午到亚龙湾入住 → 下午泡酒店泳池/沙滩 → 傍晚亚龙湾看日落</li>
+    <li><b>D2（10/3）</b>：亚龙湾玩海 —— 潜水/浮潜、海上项目，或去亚龙湾热带天堂森林公园（《非诚勿扰》取景地）</li>
+    <li><b>D3（10/4）</b>：蜈支洲岛一日游（海棠湾码头出发，海水最清、浮潜好）</li>
+    <li><b>D4（10/5）</b>：南山文化旅游区（海上观音）或 天涯海角 + 三亚湾椰梦长廊日落</li>
+    <li><b>D5（10/6）</b>：后海村冲浪 / 免税店购物 / 酒店躺平</li>
+    <li><b>D6（10/7）</b>：上午自由活动 → 下午退房 → 20:10 起飞回北京（23:55 落地大兴）</li>
   </div>
 
   <div class="concl">
     <h3>🧳 实用贴士</h3>
-    <li><b>签证</b>：中国公民赴马来西亚免签（30 天），需提前填 MDAC 电子入境卡，建议出发前 3 天内在线提交。</li>
-    <li><b>货币</b>：马币 MYR，机场和市区都能换，市区汇率更好；大店可刷卡，夜市/码头多用现金。</li>
-    <li><b>海岛装备</b>：防晒霜（建议 reef-safe）、浮潜面镜、防水袋、驱蚊液。十月雨季备一件轻薄雨衣。</li>
-    <li><b>交通</b>：市区用 Grab 打车最方便便宜；去跳岛到哲斯顿码头（Jesselton Point）买船票，建议一早去。</li>
-    <li><b>跳岛费用参考</b>：码头买票按岛计费 + 上岛保育费，具体价格以现场为准。</li>
-    <li><b>时差</b>：与北京时间无时差，不用担心。</li>
+    <li><b>不用签证</b>：国内出行，带身份证即可，比出境省一堆手续。</li>
+    <li><b>十月天气</b>：29°C 白天 / 24°C 夜间，降雨 190mm 约 14 天，多为短时阵雨；但十月仍是海南台风季尾，出行前留意台风预警。</li>
+    <li><b>交通</b>：三亚打车/网约车方便；亚龙湾到市区约 30 分钟，到海棠湾约 40 分钟。</li>
+    <li><b>玩海建议</b>：亚龙湾海水最好；蜈支洲岛浮潜/潜水最佳，建议早班船避开人流。</li>
+    <li><b>防晒</b>：海南紫外线强，防晒霜、遮阳帽、防晒衣备齐。</li>
   </div>
 
   <div class="concl">
     <h3>⚠️ 出发前请确认（小欣没法替你核实的）</h3>
-    <li>航班时刻与价格会变，<b>以航司/飞猪实付为准</b>；去程是 10/2 晚 20:50 北京大兴起飞的红眼航班、回程 10/8 18:00 亚庇起飞，请再核对一次机场和航站楼。</li>
-    <li>马来西亚免签政策与 MDAC 要求可能调整，出行前请查最新官方公告。</li>
-    <li>十月为雨季，出海行程可能因风浪取消，建议把跳岛排在行程前段，留出机动日。</li>
+    <li>航班时刻与价格会变，<b>以航司/飞猪实付为准</b>；回程 23:55 落地北京，如果你 10/7 有安排，请改订更早的班次。</li>
+    <li>十月为海南台风季尾，若遇台风航班可能取消，建议留出机动时间。</li>
     <li>酒店价格为查询时点参考价，国庆期间可能上浮或满房，尽快锁定。</li>
+    <li>三亚海鲜市场等消费场所请自行留意价格，避免纠纷。</li>
   </div>
 </section>
 
 <div class="footer">
-  数据来源：<a href="https://www.fliggy.com/" target="_blank">飞猪</a>（机票/酒店实时查询）· <a href="https://www.trip.com/hotels/list?city=1393&checkin=2026-10-02&checkout=2026-10-08&adult=2&crn=1&curr=CNY&locale=zh-CN" target="_blank">trip.com</a>（酒店比价）· 天气数据来自 weather-and-climate.com / holiday-weather.com<br>
+  数据来源：<a href="https://www.fliggy.com/" target="_blank">飞猪</a>（机票/酒店实时查询）· 天气数据来自 weather-and-climate.com<br>
   机票均为 <b>北京出发</b>（首都 PEK / 大兴 PKX）· 查询时间 2026-09-27 · 价格实时浮动，下单前请以页面实付为准 · 图片版权归各酒店/平台所有 · 页面由小欣生成 🌴
 </div>
 
